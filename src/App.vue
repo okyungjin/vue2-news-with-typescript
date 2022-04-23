@@ -8,12 +8,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import ToolBar from './components/ToolBar.vue';
 import Spinner from './components/Spinner.vue';
 import { bus } from './utils/bus';
 
-export default {
+export default Vue.extend({
   components: { Spinner, ToolBar },
   data() {
     return {
@@ -36,7 +37,7 @@ export default {
     bus.$off('start:spinner', this.startSpinner);
     bus.$off('end:spinner', this.endSpinner);
   },
-};
+});
 </script>
 
 <style>
