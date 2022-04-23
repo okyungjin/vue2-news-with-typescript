@@ -1,4 +1,4 @@
-import VueRouter from 'vue-router';
+import VueRouter, { NavigationGuardNext, Route } from 'vue-router';
 import Vue from 'vue';
 import ItemView from '../views/ItemView.vue';
 import UserView from '../views/UserView.vue';
@@ -22,7 +22,7 @@ export default new VueRouter({
       path: '/news',
       name: 'news',
       component: NewsView,
-      beforeEnter: (to, _, next) => {
+      beforeEnter: (to: Route, _, next: NavigationGuardNext<Vue>) => {
         bus.$emit(START_SPINNER);
         store
           .dispatch('FETCH_LIST', to.name)
