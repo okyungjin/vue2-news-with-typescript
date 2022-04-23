@@ -6,6 +6,7 @@
   - [Vue.js 프로젝트 TypeScript로 마이그레이션 하기](#vuejs-프로젝트-typescript로-마이그레이션-하기)
     - [1) Vue CLI 사용](#1-vue-cli-사용)
     - [2) TypeScript 프로젝트 생성 후 JavaScript 소스 이관](#2-typescript-프로젝트-생성-후-javascript-소스-이관)
+  - [tsconfig strict 옵션](#tsconfig-strict-옵션)
 
 # About Project
 [News App with Vue 2](https://github.com/okyungjin/vue2-news) 프로젝트에 TypeScript를 점진적으로 적용해보는 프로젝트입니다.
@@ -57,3 +58,13 @@ Vue CLI를 통해 TypeScript 프로젝트를 생성하고 JavaScript 소스를 �
 **팁**
 
 타입 체킹은 덜 엄격한 방식에서 점점 엄격한 방식으로 적용하는 것을 추천한다.
+
+## tsconfig strict 옵션
+`App.vue` 의 `loadingStatus` 가 boolean으로 초기화 되었지만, 타입을 any로 인식하고 있는 걸 볼 수 있다.
+
+<img width="366" alt="tsconfig-strict" src="https://user-images.githubusercontent.com/31913666/164909956-fdaa53ee-33c1-4819-ac2c-9a7aa3c958c2.png">
+
+이는 `tsconfig.json` 의 strict 옵션이 false로 되어있기 때문이다. any 타입이면 boolean 외의 타입도 할당이 가능하므로 TypeScript의 이점을 사용할 수 없다.
+
+strict 옵션을 true로 변경하면 타입 추론이 잘 되는 것을 확인할 수 있으나, 점진적 적용을 위해 우선은 false로 설정하자.
+
