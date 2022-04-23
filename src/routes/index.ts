@@ -22,28 +22,28 @@ export default new VueRouter({
       path: '/news',
       name: 'news',
       component: NewsView,
-      beforeEnter: (to: Route, _, next: NavigationGuardNext<Vue>) => {
+      beforeEnter: async (to: Route, _, next: NavigationGuardNext<Vue>) => {
         bus.$emit(START_SPINNER);
-        store
-          .dispatch('FETCH_LIST', to.name)
-          .then(() => next())
-          .catch((error) => {
-            throw new Error(error);
-          });
+        try {
+          await store.dispatch('FETCH_LIST', to.name);
+          next();
+        } catch (error) {
+          throw new Error(error);
+        }
       },
     },
     {
       path: '/ask',
       name: 'ask',
       component: createListView('AskView'), // HOC
-      beforeEnter: (to, _, next) => {
+      beforeEnter: async (to, _, next) => {
         bus.$emit(START_SPINNER);
-        store
-          .dispatch('FETCH_LIST', to.name)
-          .then(() => next())
-          .catch((error) => {
-            throw new Error(error);
-          });
+        try {
+          await store.dispatch('FETCH_LIST', to.name);
+          next();
+        } catch (error) {
+          throw new Error(error);
+        }
       },
     },
     {
