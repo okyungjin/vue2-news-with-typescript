@@ -7,6 +7,7 @@
     - [1) Vue CLI 사용](#1-vue-cli-사용)
     - [2) TypeScript 프로젝트 생성 후 JavaScript 소스 이관](#2-typescript-프로젝트-생성-후-javascript-소스-이관)
   - [tsconfig strict 옵션](#tsconfig-strict-옵션)
+  - [store는 꼭 필요할 때만 사용하기](#store는-꼭-필요할-때만-사용하기)
 
 # About Project
 [News App with Vue 2](https://github.com/okyungjin/vue2-news) 프로젝트에 TypeScript를 점진적으로 적용해보는 프로젝트입니다.
@@ -68,3 +69,16 @@ Vue CLI를 통해 TypeScript 프로젝트를 생성하고 JavaScript 소스를 �
 
 strict 옵션을 true로 변경하면 타입 추론이 잘 되는 것을 확인할 수 있으나, 점진적 적용을 위해 우선은 false로 설정하자.
 
+## store는 꼭 필요할 때만 사용하기
+`ListView.vue` 에서 ListItem 컴포넌트를 불러오는 구조이다.
+ListItem 컴포넌트에서는 store에서 list 데이터를 불러오는데, 사실 이러한 구조는 피하는 것이 좋다.
+
+```html
+<template>
+  <ListItem></ListItem>
+</template>
+```
+
+ListView에서 데이터를 ListItem으로 내려주면 된다. 이러한 데이터까지 store에 넣게 되면 Mixin을 같이 사용했을 때, 데이터 흐름을 파악하기가 매우 어려워진다.
+
+> store에 넣기에 적절한 데이터인지 고민 후에 store를 통해 처리하도록 하자.
