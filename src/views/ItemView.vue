@@ -18,23 +18,30 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import UserProfile from '../components/UserProfile.vue';
 
-export default {
+export default Vue.extend({
+  props: {
+    items: {
+      type: Array,
+      required: true,
+    },
+  },
   components: { UserProfile },
-  created() {
+  created(): void {
     this.$store.dispatch('FETCH_ITEM', this.itemId);
   },
   computed: {
-    itemId() {
+    itemId(): string {
       return this.$route.params.id;
     },
-    itemInfo() {
+    itemInfo(): any {
       return this.$store.state.itemInfo;
     },
   },
-};
+});
 </script>
 
 <style scoped>

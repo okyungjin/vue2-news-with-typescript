@@ -82,3 +82,18 @@ ListItem 컴포넌트에서는 store에서 list 데이터를 불러오는데, �
 ListView에서 데이터를 ListItem으로 내려주면 된다. 이러한 데이터까지 store에 넣게 되면 Mixin을 같이 사용했을 때, 데이터 흐름을 파악하기가 매우 어려워진다.
 
 > store에 넣기에 적절한 데이터인지 고민 후에 store를 통해 처리하도록 하자.
+
+
+## error나 warning 발생해도 overlay 뜨지 않도록 설정하기
+
+root 디렉토리에 `vue.config.js` 를 생성한 후 다음 소스를 넣어준다.
+error나 warning이 발생해도 overlay가 발생하지 않는다.
+ 
+```js
+module.exports = {
+  devServer: {
+    overlay: false,
+  },
+};
+```
+
